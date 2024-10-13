@@ -1,0 +1,43 @@
+service.name: ${projectName}
+
+info.app:
+  name: ${projectName}
+  version: ${projectVersion}
+
+spring:
+  # Jackson Configuration
+  jackson:
+    serialization.write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+  security:
+    user:
+      roles: ENDPOINT_ADMIN
+  flyway.enabled: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.HSQLDialect
+        flushMode: ALWAYS
+        jdbc.time_zone: UTC
+    show-sql: true
+    generate-ddl: true
+  datasource:
+    name: demo
+    url: jdbc:hsqldb:mem:db;DB_CLOSE_DELAY=-1
+    username: SA
+    password:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+
+management:
+  info:
+    git.mode: full
+  endpoints:
+    web.exposure.include: '*'
+
+spring.security.user:
+  name: admin
+  password: admin
+
+
+
+

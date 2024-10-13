@@ -1,0 +1,16 @@
+package com.company.app.repository.entity.plant
+
+enum class PlantFamily {
+  AMARYLLIDACEAE,
+  UMBELLIFERAE,
+  LAMIACEAE,
+  SOLANACEAE,
+  ASTERACEAE,
+  BRASSICACEAE,
+  LILIACEAE,
+  ROSACEAE,
+  CUCURBITACEAE,
+  CHENOPODIACEAE,
+  FABACEAE,
+  POACEAE,
+}

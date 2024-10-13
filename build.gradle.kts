@@ -34,7 +34,7 @@ repositories {
   maven(url = "https://plugins.gradle.org/m2/")
 }
 
-val awsXrayVersion = "2.15.3"
+val awsXrayVersion = "2.18.2"
 val awsSdkVersion = "1.12.730"
 val springCloudVersion = "2023.0.1"
 val fasterXmlVersion = "2.17.1"

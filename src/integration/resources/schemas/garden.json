@@ -1,0 +1,66 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "layoutId",
+    "season",
+    "sectionStates"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "layoutId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "season": {
+      "type": "string"
+    },
+    "sectionStates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sectionState"
+      }
+    },
+    "sectionGroups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sectionGroup"
+      }
+    }
+  },
+  "$defs": {
+    "sectionState": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "sectionGroup": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

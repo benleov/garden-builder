@@ -1,0 +1,131 @@
+service.name: ${projectName}
+info.app:
+  name: ${projectName}
+  version: ${projectVersion}
+
+server.port: 8084
+logging.level:
+  com:
+    company: DEBUG
+  com.amazonaws.xray.strategy.sampling.pollers: WARN
+
+spring:
+  main.banner-mode: console
+  # Jackson Configuration
+  jackson:
+    serialization.write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+  security:
+    user:
+      roles: ENDPOINT_ADMIN
+  # TODO: DISABLED TEMPORARILY
+  flyway.enabled: false
+  jpa:
+    properties.hibernate.jdbc.time_zone: UTC
+    properties.org.hibernate.flushMode: ALWAYS
+    show-sql: true
+    # TODO: ENABLED TEMPORARILY
+    generate-ddl: true
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    name: ${projectName}-db-pool
+    url: jdbc:mysql://127.0.0.1:3306/garden_service?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 2
+      leak-detection-threshold: 60000
+      validation-timeout: 500
+      connection-timeout: 10000
+      max-lifetime: 600000
+      allow-pool-suspension: true
+      connection-test-query: SELECT 1
+
+management:
+  info:
+    git.mode: full
+  endpoints:
+    web.exposure.include: '*'
+
+cloud.aws:
+  region:
+    auto: false
+    static: ap-southeast-2
+
+
+---
+# Running on docker locally, connects to locally running SQL instance.
+# Database is configured to initial via JPA generated DDL.
+# Note allowPublicKeyRetrieval is enabled. This should not be enabled in a production environment.
+
+spring:
+  config:
+    activate:
+      on-profile: docker-local
+  flyway.enabled: false
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    properties.hibernate.jdbc.time_zone: UTC
+    properties.org.hibernate.flushMode: ALWAYS
+    show-sql: true
+    generate-ddl: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    name: ${projectName}-docker-local--db-pool
+    # switch to host.docker.internal to use a local database outside of docker
+    url: jdbc:mysql://mysqldb:3306/garden_service?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+---
+
+# running locally
+# Flyway is disabled, and tables are generated in memory
+spring:
+  config:
+    activate:
+      on-profile: test # TODO: temporarily configured test profile to use HSQLDB
+
+  flyway.enabled: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.HSQLDialect
+        flushMode: ALWAYS
+        jdbc.time_zone: UTC
+    show-sql: true
+    generate-ddl: true
+  datasource:
+    name: demo
+    # NOTE: syntax_pgs needs to be set to true for generate ddl
+    # otherwise it will fail due to trying to execute SELECT EXISTS;
+    # the end result being an SQL syntax exception.
+    url: jdbc:hsqldb:mem:db;DB_CLOSE_DELAY=-1;sql.syntax_pgs=true
+    username: SA
+    password:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+---
+
+spring.security.user:
+  name: admin
+  password: admin
+
+---
+spring:
+  config:
+    activate:
+      on-profile: deploy
+
+cloud.aws:
+  region.auto: true
+
+database:
+  host:
+  username:
+  password:
+
+spring.datasource:
+  url: jdbc:mysql://\${database.host}:3306/user_service?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+  username: \${database.username}
+  password: \${database.password}

@@ -1,0 +1,26 @@
+services:
+  mysqldb:
+    image: mysql:8.0.28
+    platform: linux/x86_64 # no arm image at this time
+    environment:
+      - MYSQL_ROOT_HOST=172.21.0.0/255.255.0.0 # note this is required because the container won't allow remote connections by default
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=garden_service
+    healthcheck:
+      test: "mysql -uroot -proot garden_service -e 'select 1'"
+      interval: 1s
+      retries: 120
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - service-network
+networks:
+  service-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+volumes:
+  db:

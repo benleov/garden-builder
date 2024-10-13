@@ -1,0 +1,42 @@
+services:
+  mysqldb:
+    image: mysql:8.0.28
+    platform: linux/x86_64 # no arm image at this time
+    environment:
+      - MYSQL_ROOT_HOST=172.21.0.0/255.255.0.0 # note this is required because the container won't allow remote connections by default
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=garden_service
+    healthcheck:
+      test: "mysql -uroot -proot garden_service -e 'select 1'"
+      interval: 1s
+      retries: 120
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - service-network
+  garden-server:
+    container_name: garden-server
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker-local"
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - "8084:8084"
+    networks:
+      - service-network
+    depends_on:
+      # this is poorly documented and has been deprecated and re-introduced. service_healthy should use the 'healthcheck'
+      # defined against the dependant service to determine if it's ready.
+      mysqldb:
+        condition: service_healthy
+networks:
+  service-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+volumes:
+  db:

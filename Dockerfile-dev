@@ -1,0 +1,19 @@
+# Builds and runs the application
+
+# NOTE: adoptopenjdk/openjdk14:alpine or alpine-slim does not work on m1 processor at this time
+FROM adoptopenjdk/openjdk14 as build
+WORKDIR /app
+
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle.kts .
+COPY .editorconfig .editorconfig
+COPY src src
+
+RUN ./gradlew build --no-daemon
+
+# run
+FROM adoptopenjdk/openjdk14
+VOLUME /tmp
+COPY --from=build app/build/libs/boot.jar boot.jar
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=docker-local", "boot.jar"]

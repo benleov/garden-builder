@@ -1,0 +1,4 @@
+FROM adoptopenjdk/openjdk14
+WORKDIR /app
+ADD build/libs/boot.jar app/boot.jar
+ENTRYPOINT ["java","${JAVA_OPTS}", "-jar", "boot.jar"]

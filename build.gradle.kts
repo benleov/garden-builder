@@ -82,7 +82,7 @@ dependencies {
   testImplementation("com.github.fge:json-schema-validator:2.2.6") // (integration test schema validation)
   testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("org.hsqldb:hsqldb:2.7.2")
+  testImplementation("org.hsqldb:hsqldb:2.7.3")
   testImplementation("org.assertj:assertj-core:3.26.3")
 }
 

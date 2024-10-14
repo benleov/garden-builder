@@ -10,7 +10,7 @@ plugins {
 
   id("io.spring.dependency-management") version "1.1.6"
 
-  kotlin("jvm") version "2.0.10" // kotlin version
+  kotlin("jvm") version "2.0.21" // kotlin version
 
   // Kotlin Spring compiler plugin
   // https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.spring

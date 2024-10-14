@@ -14,7 +14,7 @@ plugins {
 
   // Kotlin Spring compiler plugin
   // https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.spring
-  kotlin("plugin.spring") version "2.0.10"
+  kotlin("plugin.spring") version "2.0.21"
 
   // Produce git.properties for spring-boot-actuator
   id("com.gorylenko.gradle-git-properties") version "2.4.2"

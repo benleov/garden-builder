@@ -78,7 +78,7 @@ dependencies {
   implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
   // test
-  testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+  testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.2")
   testImplementation("com.github.fge:json-schema-validator:2.2.6") // (integration test schema validation)
   testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
   testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -37,7 +37,7 @@ repositories {
 val awsXrayVersion = "2.15.3"
 val awsSdkVersion = "1.12.730"
 val springCloudVersion = "2023.0.1"
-val fasterXmlVersion = "2.17.1"
+val fasterXmlVersion = "2.18.0"
 
 dependencies {
   implementation("io.github.microutils:kotlin-logging:3.0.5") // wrapper for slf4j

@@ -35,7 +35,7 @@ repositories {
 }
 
 val awsXrayVersion = "2.15.3"
-val awsSdkVersion = "1.12.730"
+val awsSdkVersion = "1.12.773"
 val springCloudVersion = "2023.0.1"
 val fasterXmlVersion = "2.18.0"
 

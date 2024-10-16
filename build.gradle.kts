@@ -52,7 +52,7 @@ dependencies {
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 
   // sql
-  implementation("com.mysql:mysql-connector-j:8.4.0")
+  implementation("com.mysql:mysql-connector-j:9.1.0")
   implementation("com.zaxxer:HikariCP:6.0.0")
   implementation("org.flywaydb:flyway-core:10.13.0")
   implementation("org.flywaydb:flyway-mysql:10.13.0")

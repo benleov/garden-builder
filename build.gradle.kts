@@ -57,7 +57,7 @@ dependencies {
   implementation("org.flywaydb:flyway-core:10.13.0")
   implementation("org.flywaydb:flyway-mysql:10.13.0")
 
-  implementation("org.apache.commons:commons-lang3:3.14.0")
+  implementation("org.apache.commons:commons-lang3:3.17.0")
   // jackson
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$fasterXmlVersion")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$fasterXmlVersion")

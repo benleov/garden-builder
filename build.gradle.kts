@@ -54,7 +54,7 @@ dependencies {
   // sql
   implementation("com.mysql:mysql-connector-j:8.4.0")
   implementation("com.zaxxer:HikariCP:6.0.0")
-  implementation("org.flywaydb:flyway-core:10.13.0")
+  implementation("org.flywaydb:flyway-core:11.1.0")
   implementation("org.flywaydb:flyway-mysql:10.13.0")
 
   implementation("org.apache.commons:commons-lang3:3.14.0")

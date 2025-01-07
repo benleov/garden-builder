@@ -70,7 +70,7 @@ dependencies {
   implementation("com.amazonaws:aws-java-sdk-sts:$awsSdkVersion")
 
   // swagger (open-api)
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.1")
 
   // growstuff api import from swagger-codegen
   implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
